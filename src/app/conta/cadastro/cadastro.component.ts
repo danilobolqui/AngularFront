@@ -4,6 +4,7 @@ import { DisplayMessage, GenericValidator } from 'src/app/utils/generic-form-val
 import { Usuario } from '../models/usuario';
 import { ContaService } from '../services/conta.service';
 import { Validacoes } from 'src/app/utils/validacao';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -15,8 +16,9 @@ export class CadastroComponent implements OnInit, AfterViewInit {
   cadastroForm!: FormGroup;
   usuario!: Usuario;
   validacao!: Validacoes;
+  errors: any[] = [];
 
-  constructor(private fb: FormBuilder, private contaService: ContaService) {
+  constructor(private fb: FormBuilder, private contaService: ContaService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -49,10 +51,15 @@ export class CadastroComponent implements OnInit, AfterViewInit {
   }
 
   processarSucesso(response: any){
+    this.cadastroForm.reset();
+    this.errors = [];
 
+    this.contaService.LocalStorage.salvarDadosLocaisUsuario(response);
+
+    this.router.navigate(['/home']);
   }
 
   processarFalha(fail: any){
-
+    this.errors = fail.error.errors;
   }
 }

@@ -6,7 +6,7 @@ import { BaseService } from "src/app/services/base.service";
 import { Usuario } from "../models/usuario";
 
 @Injectable()
-export class ContaService extends  BaseService{
+export class ContaService extends BaseService{
     constructor(private http: HttpClient){ super(); }
 
     registrarUsuario(usuario: Usuario) : Observable<Usuario>{
