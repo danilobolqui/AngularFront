@@ -5,6 +5,7 @@ import { Usuario } from '../models/usuario';
 import { ContaService } from '../services/conta.service';
 import { Validacoes } from 'src/app/utils/validacao';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cadastro',
@@ -18,7 +19,7 @@ export class CadastroComponent implements OnInit, AfterViewInit {
   validacao!: Validacoes;
   errors: any[] = [];
 
-  constructor(private fb: FormBuilder, private contaService: ContaService, private router: Router) {
+  constructor(private fb: FormBuilder, private contaService: ContaService, private router: Router, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -56,10 +57,16 @@ export class CadastroComponent implements OnInit, AfterViewInit {
 
     this.contaService.LocalStorage.salvarDadosLocaisUsuario(response);
 
-    this.router.navigate(['/home']);
+    let toast = this.toastr.success('Registro realizado com sucesso!', 'Seja bem vindo!');
+    if (toast){
+      toast.onHidden.subscribe(() => {
+        this.router.navigate(['/home']);
+      })
+    }
   }
 
   processarFalha(fail: any){
     this.errors = fail.error.errors;
+    this.toastr.error('Ocorreu um erro!', 'Ooops =(');
   }
 }
