@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { ContaAppComponent } from './conta.app.component';
 import { ContaService } from './services/conta.service';
 import { AppFieldErrorDisplayComponent } from '../validacao/app-field-error-display/app-field-error-display.component';
+import { ContaGuard } from './services/conta.guard';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AppFieldErrorDisplayComponent } from '../validacao/app-field-error-disp
     HttpClientModule
   ],
   providers: [
-    ContaService
+    ContaService,
+    ContaGuard
   ]
 })
 export class ContaModule { }
