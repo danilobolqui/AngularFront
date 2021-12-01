@@ -111,8 +111,13 @@ class Validacoes {
     //Valida CPF.
     static validaCpf(controle: AbstractControl) {
         let cpf = controle.value;
-    
-        cpf = cpf.replace(/[^\d]+/g,'');
+        
+        if (cpf === null) return null;
+
+        if (cpf !== null && cpf !== undefined)
+        {
+            cpf = cpf.replace(/[^\d]+/g,'');
+        }
 
         let soma: number = 0;
         let resto: number;
@@ -161,7 +166,12 @@ class Validacoes {
       static validaCnpj(controle: AbstractControl) {
         let cnpj = controle.value;
  
-        cnpj = cnpj.replace(/[^\d]+/g,'');
+        if (cnpj === null) return null;
+
+        if (cnpj !== null && cnpj !== undefined)
+        {
+            cnpj = cnpj.replace(/[^\d]+/g,'');
+        }
      
         if(cnpj == '') return { cnpjInvalido: true };
          

@@ -6,6 +6,8 @@ import { DisplayMessage } from 'src/app/utils/generic-form-validation';
 import { Fornecedor } from '../models/fornecedor';
 import { FornecedorService } from '../services/fornecedor.service';
 import { Validacoes } from 'src/app/utils/validacao';
+import { CepConsulta } from '../models/endereco';
+import { StringUtils } from 'src/app/utils/string-utils';
 
 @Component({
   selector: 'app-novo',
@@ -33,7 +35,7 @@ export class NovoComponent implements OnInit {
     //Precisa do "<div formGroupName='endereco'>" no html.
     this.fornecedorForm = this.fb.group({
       nome: ['', [Validators.required, Validators.maxLength(100)]],
-      documento: ['', Validators.compose([Validators.required, Validacoes.validaCpf])],
+      documento: ['', Validators.compose([Validators.required])],
       ativo: ['', [Validators.required]],
       tipoFornecedor: ['', [Validators.required]],
         endereco: this.fb.group({
@@ -85,10 +87,38 @@ export class NovoComponent implements OnInit {
     return this.fornecedorForm.get('documento')!;
   }
 
+  buscarCep(cep: string){
+    cep = StringUtils.somenteNumeros(cep);
+    if(cep.length < 8) return;
+
+    this.fornecedorService.consultarCep(cep)
+      .subscribe(
+          cepRetorno => this.preencherEnderecoConsulta(cepRetorno),
+          erro => this.errors.push(erro)
+      );
+  }
+
+  preencherEnderecoConsulta(cepConsulta: CepConsulta){
+      //Seta os valores do form filho "endereco".
+      this.fornecedorForm.patchValue({
+        endereco: {
+          logradouro: cepConsulta.logradouro ?? '',
+          bairro: cepConsulta.bairro ?? '',
+          cep: cepConsulta.cep ?? '',
+          cidade: cepConsulta.localidade ?? '',
+          estado: cepConsulta.uf ?? ''
+        }
+      });
+  }
+
   adicionarFornecedor() {
     if (this.fornecedorForm?.dirty && this.fornecedorForm?.valid) {
       this.fornecedor = Object.assign({}, this.fornecedor, this.fornecedorForm?.value);
       this.formResult = JSON.stringify(this.fornecedor);
+
+      this.fornecedor.endereco!.cep = StringUtils.somenteNumeros(this.fornecedor.endereco?.cep ?? '');
+      this.fornecedor.documento = StringUtils.somenteNumeros(this.fornecedor.documento ?? '');
+      this.fornecedor.tipoFornecedor = this.fornecedor.tipoFornecedor == 1 ? +'1' : +'2';
 
       this.fornecedorService.novoFornecedor(this.fornecedor)
         .subscribe(

@@ -27,7 +27,7 @@
                 <div class="form-group">
                     <label class="control-label">Documento</label>
                     <div>
-                        <input class="form-control" id="documento" type="text" [placeholder]="placeHolderCampoDoc" formControlName="documento" [ngClass]="{'is-invalid': validacao.invalidoETocado('documento') }" [mask]="maskCampoDoc" />
+                        <input class="form-control" id="documento" type="text" [placeholder]="placeHolderCampoDoc" formControlName="documento" [ngClass]="{'is-invalid': validacao.invalidoETocado('documento') }" />
                         <span class="text-danger">
                             <span *ngIf="validacao.invalidoETocado('documento')">{{validacao.primeiroErro('documento')}}</span>
                         </span>
@@ -52,7 +52,7 @@
                     <div class="form-group">
                         <label class="control-label">CEP</label>
                         <div>
-                            <input class="form-control" id="cep" type="text" placeholder="CEP (requerido)" formControlName="cep" [ngClass]="{ 'is-invalid': validacao.invalidoETocado('endereco.cep') }" />
+                            <input class="form-control" id="cep" type="text" placeholder="CEP (requerido)" formControlName="cep" (blur)="buscarCep($any($event.target).value)" [ngClass]="{ 'is-invalid': validacao.invalidoETocado('endereco.cep') }" mask="00000-000" />
                             <span class="text-danger">
                                 <span *ngIf="validacao.invalidoETocado('endereco.cep')">{{validacao.primeiroErro('cep')}}</span>
                             </span>
