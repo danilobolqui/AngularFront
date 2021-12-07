@@ -27,13 +27,13 @@
             </td>
             <td class="text-right">
                 <a class="btn btn-info" [routerLink]="['/fornecedores/detalhes',fornecedor.id]">
-                    <span class="fa fa-search"></span>
+                    <span class="fa fa-search">Det.</span>
                 </a>&nbsp;
                 <a class="btn btn-warning" [routerLink]="['/fornecedores/editar',fornecedor.id]">
-                    <span class="fa fa-pencil-alt"></span>
+                    <span class="fa fa-pencil-alt">Editar</span>
                 </a>&nbsp;
-                <a class="btn btn-danger" [routerLink]="['/fornecedores/excluir',fornecedor.id]">
-                    <span class="fa fa-trash"></span>
+                <a class="btn btn-danger text-dark" [routerLink]="['/fornecedores/excluir',fornecedor.id]">
+                    <span class="fa fa-trash">Excluir</span>
                 </a>
             </td>
         </tr>

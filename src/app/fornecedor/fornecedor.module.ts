@@ -11,6 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FornecedorService } from './services/fornecedor.service';
 import { NgxMaskModule } from 'ngx-mask';
+import { FornecedorResolve } from './services/fornecedor.resolve';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -27,10 +29,12 @@ import { NgxMaskModule } from 'ngx-mask';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [
-    FornecedorService
+    FornecedorService,
+    FornecedorResolve
   ]
 })
 export class FornecedorModule { }

@@ -13,10 +13,7 @@ export class DetalhesComponent {
   fornecedor: Fornecedor = new Fornecedor();
 
   constructor(
-    private route: ActivatedRoute,
-    private fornecedorService: FornecedorService) {
-      //route.params['id'] -> Foi enviado o param dessa forma no curso do Eduardo Pires.
-      this.fornecedorService.obterPorId(route.snapshot.params.id)
-      .subscribe(fornecedor => this.fornecedor = fornecedor);
+    private route: ActivatedRoute) {
+      this.fornecedor = this.route.snapshot.data['fornecedor'];
   }
 }
