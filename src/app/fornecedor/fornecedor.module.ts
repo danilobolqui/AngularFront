@@ -12,6 +12,7 @@ import { FornecedorService } from './services/fornecedor.service';
 import { NgxMaskModule } from 'ngx-mask';
 import { FornecedorResolve } from './services/fornecedor.resolve';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { FornececedorGuard } from './services/fornecedor.guard';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   ],
   providers: [
     FornecedorService,
-    FornecedorResolve
+    FornecedorResolve,
+    FornececedorGuard
   ]
 })
 export class FornecedorModule { }

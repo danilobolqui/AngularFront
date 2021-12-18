@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, Resolve } from "@angular/router";
-import { Fornecedor } from "../models/fornecedor";
-import { FornecedorService } from "./fornecedor.service";
+import { Injectable } from '@angular/core';
+import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
+import { Fornecedor } from '../models/fornecedor';
+import { FornecedorService } from './fornecedor.service';
 
 @Injectable()
 export class FornecedorResolve implements Resolve<Fornecedor> {
