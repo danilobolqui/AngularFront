@@ -8,7 +8,6 @@ import { NovoComponent } from './novo/novo.component';
 import { FornecedorAppComponent } from './fornecedor.app.component';
 import { FornecedorRoutingModule } from './fornecedor.route';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { FornecedorService } from './services/fornecedor.service';
 import { NgxMaskModule } from 'ngx-mask';
 import { FornecedorResolve } from './services/fornecedor.resolve';
@@ -28,7 +27,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FornecedorRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     NgxMaskModule.forRoot(),
     NgxSpinnerModule
   ],
